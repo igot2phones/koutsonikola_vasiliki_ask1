@@ -15,10 +15,44 @@ void search();
 void update();
 void erase();
 void print();
+void quit();
 
-struct movie std_array[STR_SIZE]; // Declare the size of the struct size
+struct movie mov_array[STR_SIZE]; // Declare the size of the struct size
 
 int main() {
+    printf("Welcome to our movie database\n");
+    printf("Please choose one of the following options:\n");
+    printf("i. Insert a new movie\n");
+    printf("s. Search for a movie\n");
+    printf("u. Update a movie\n");
+    printf("e. Delete a movie\n");
+    printf("p. Print all movies\n");
+    printf("q. Quit\n");
+    char choice;
+    scanf("%c", &choice);
+    switch (choice) {
+        case 'i':
+            insert();
+            break;
+        case 's':
+            search();
+            break;
+        case 'u':
+            update();
+            break;
+        case 'e':
+            erase();
+            break;
+        case 'p':
+            print();
+            break;
+        case 'q':
+            quit();
+            break;
+        default:
+            printf("Please enter a valid option");
+            break;
+    }
     return 0;
 }
 
@@ -28,7 +62,7 @@ void insert() {
     printf("Enter code: ");
     scanf("%d", &code_m);
         for (int i = 0; i <= m_counter ; i++){
-            if (std_array[i].code == code_m){
+            if (mov_array[i].code == code_m){
                 printf("Code already exists");
                 flag = 1;
                 break;
@@ -40,12 +74,13 @@ void insert() {
             flag = 1;
         }
         if (flag == 0){
-            std_array[code_m].code = code_m;
+            mov_array[code_m].code = code_m;
             printf("Enter title: ");
-            scanf("%s", std_array[code_m].title);
+            scanf("%s", &mov_array[code_m].title);
             printf("Enter year: ");
-            scanf("%d", &std_array[code_m].year);
+            scanf("%d", &mov_array[code_m].year);
             m_counter++;
+            printf("Movie inserted successfully");
         }
 }
 
@@ -54,10 +89,11 @@ void search(){
     printf("Enter code to find: ");
     scanf("%d", &code_s);
     for (int i = 0; i <= m_counter ; i++){
-        if (std_array[i].code == code_s){
-            printf("Code: %d\n", std_array[i].code);
-            printf("Title: %s\n", std_array[i].title);
-            printf("Year: %d\n", std_array[i].year);
+        if (mov_array[i].code == code_s){
+            printf("Movie found\n");
+            printf("Code: %d\n", mov_array[i].code);
+            printf("Title: %s\n", mov_array[i].title);
+            printf("Year: %d\n", mov_array[i].year);
             break;
         } else if (i==m_counter) {
             printf("Cannot find the movie, please enter the correct number next time!!");
@@ -65,4 +101,58 @@ void search(){
         }
         
     }
+}
+
+void update(){
+    int code_u;
+    printf("Enter code for movie update: ");
+    scanf("%d", &code_u);
+    for (int i = 0; i <= m_counter ; i++) {
+        if (mov_array[i].code == code_u) {
+            printf("Enter new year: ");
+            scanf("%d", &mov_array[i].year);
+            printf("Movie updated");
+            break;
+        } else if (m_counter == i) {
+            printf("Cannot find the movie, please enter the correct number next time!!");
+            break;
+        }
+        
+        
+    }
+    
+}
+
+void erase(){
+    int code_e;
+    printf("Give me the code of the movie you want to delete: ");
+    scanf("%d", &code_e);
+    for (int i = 0; i <= m_counter; i++) {
+        if (mov_array[i].code == code_e) {
+            mov_array[i].code = mov_array[m_counter].code;
+            mov_array[i].title[title_size] = mov_array[m_counter].title[title_size];
+            mov_array[i].year = mov_array[m_counter].year;
+            m_counter--;
+            printf("Movie deleted");
+            break;
+        } else if (m_counter == i) {
+            printf("Cannot find the movie, please enter the correct number next time!!");
+            break;
+        }
+    }
+    
+}
+
+void print(){
+    printf("Here is a list of all movies:\n");
+    for (int i = 0; i <= m_counter; i++) {
+        printf("Code: %d\n", mov_array[i].code);
+        printf("Title: %s\n", mov_array[i].title);
+        printf("Year: %d\n", mov_array[i].year);
+    }
+}
+
+void quit(){
+    printf("Thank you for using our program please give us a 10/10 score on this project :)\n");
+    quit();
 }
