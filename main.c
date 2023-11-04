@@ -98,6 +98,7 @@ void insert() {
 
 void search(){ //bazw klasika ton elenxo gia ton kwdiko me tin loopa kai to if, if else
     int code_s;
+    int flag = 0; // an brikr thn tainia 
     printf("Enter code to find: ");
     scanf("%d", &code_s);
     for (int i = 0; i < m_counter ; i++){  //edw basw n-1 giati to index jekina apo 0 kai oxi 1
@@ -106,17 +107,19 @@ void search(){ //bazw klasika ton elenxo gia ton kwdiko me tin loopa kai to if, 
             printf("Code: %d\n\n", mov_array[i].code);
             printf("Title: %s\n", mov_array[i].title);
             printf("Year: %d\n", mov_array[i].year);
-            break;
-        } else if (i==m_counter) { // an den brei tipota (to exw testarei den tha ginei false trigger {eixa kai egw tin aporia} )
-            printf("Cannot find the movie, please enter the correct number next time!!");
+            flag = 1; // thn brike
             break;
         }
-        
     }
+    if (flag == 0){
+    printf("Cannot find the movie, please enter the correct number next time!!");
+    }
+    
 }
 
 void update(){ //bazw klasika ton elenxo gia ton kwdiko me tin loopa kai to if, if else 
     int code_u;
+    int flag = 0;
     printf("Enter code for movie update: ");
     scanf("%d", &code_u);
     while ((getchar()) != '\n');  // Clear input buffer gia na min mou exei problima sto line 126
@@ -127,19 +130,20 @@ void update(){ //bazw klasika ton elenxo gia ton kwdiko me tin loopa kai to if, 
             printf("Enter new year: ");
             scanf("%d", &mov_array[i].year);
             printf("Movie updated");
+            flag = 1;
             break; 
-        } else if (m_counter == i) {
+        } 
+    }
+    
+    if (flag == 0) {
             printf("Cannot find the movie, please enter the correct number next time!!");
-            break;
-        }
-        
-        
     }
     
 }
 
 void erase(){
     int code_e;
+    int flag = 0;
     printf("Give me the code of the movie you want to delete: ");
     scanf("%d", &code_e);
     for (int i = 0; i < m_counter; i++) {  //edw basw n-1 giati to index jekina apo 0 kai oxi 1
@@ -147,13 +151,13 @@ void erase(){
             mov_array[i] = mov_array[m_counter-1];
             m_counter--;
             printf("Movie deleted");
-            break;
-        } else if (m_counter == i) {
-            printf("Cannot find the movie, please enter the correct number next time!!");
+            flag = 1;
             break;
         }
     }
-    
+        if (flag == 0) {
+            printf("Cannot find the movie, please enter the correct number next time!!");
+    }
 }
 
 void print(){
