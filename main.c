@@ -119,8 +119,11 @@ void update(){ //bazw klasika ton elenxo gia ton kwdiko me tin loopa kai to if, 
     int code_u;
     printf("Enter code for movie update: ");
     scanf("%d", &code_u);
-    for (int i = 0; i < m_counter ; i++) {  //edw basw n-1 giati to index jekina apo 0 kai oxi 1
+    while ((getchar()) != '\n');  // Clear input buffer gia na min mou exei problima sto line 126
+    for (int i = 0; i < m_counter ; i++) {  //edw basw n-1 giati to index jekina apo 0 kai oxi 1 ( < )
         if (mov_array[i].code == code_u) {
+            printf("Enter new title: ");
+            fgets(mov_array[i].title, title_size, stdin);
             printf("Enter new year: ");
             scanf("%d", &mov_array[i].year);
             printf("Movie updated");
@@ -141,9 +144,7 @@ void erase(){
     scanf("%d", &code_e);
     for (int i = 0; i < m_counter; i++) {  //edw basw n-1 giati to index jekina apo 0 kai oxi 1
         if (mov_array[i].code == code_e) {
-            mov_array[i].code = mov_array[m_counter].code;
-            mov_array[i].title[title_size] = mov_array[m_counter].title[title_size];
-            mov_array[i].year = mov_array[m_counter].year;
+            mov_array[i] = mov_array[m_counter-1];
             m_counter--;
             printf("Movie deleted");
             break;
