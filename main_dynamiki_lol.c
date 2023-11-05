@@ -203,6 +203,7 @@ void print(){
 
 void quit(){
     printf("Thank you for using our program please give us a 10/10 score on this project :)\n");
+    free(N);
     // printf("debug : teleiwses mia kai kalh :)\n");
     exit(0); // teleionei to programma 
 }
